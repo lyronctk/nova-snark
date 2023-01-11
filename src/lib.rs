@@ -24,6 +24,8 @@ pub mod gadgets;
 pub mod provider;
 pub mod spartan;
 pub mod traits;
+pub mod circuit;
+pub mod r1cs;
 
 use crate::bellperson::{
   r1cs::{NovaShape, NovaWitness},

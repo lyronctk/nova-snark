@@ -32,6 +32,7 @@ use bellperson::{
 use ff::Field;
 use serde::{Deserialize, Serialize};
 
+use serde::{Serialize, Deserialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct NovaAugmentedCircuitParams {
   limb_width: usize,
