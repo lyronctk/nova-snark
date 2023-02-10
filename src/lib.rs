@@ -13,12 +13,10 @@
 
 // private modules
 mod bellperson;
-pub mod circuit;
 mod commitments;
 mod constants;
 mod nifs;
 mod poseidon;
-pub mod r1cs;
 
 // public modules
 pub mod errors;
@@ -312,7 +310,7 @@ where
           &r_snark.l_u_secondary,
           &r_snark.l_w_secondary,
         )?;
-
+        
         let mut cs_primary: SatisfyingAssignment<G1> = SatisfyingAssignment::new();
         let inputs_primary: NovaAugmentedCircuitInputs<G2> = NovaAugmentedCircuitInputs::new(
           pp.r1cs_shape_secondary.get_digest(),
