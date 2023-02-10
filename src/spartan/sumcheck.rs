@@ -10,7 +10,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug)]
 pub struct SumcheckProof<G: Group> {
-  pub compressed_polys: Vec<CompressedUniPoly<G>>,
+  compressed_polys: Vec<CompressedUniPoly<G>>,
 }
 
 impl<G: Group> SumcheckProof<G> {
