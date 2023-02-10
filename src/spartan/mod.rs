@@ -58,12 +58,10 @@ impl<G: Group, EE: EvaluationEngineTrait<G, CE = G::CE>> VerifierKeyTrait<G>
 /// A succinct proof of knowledge of a witness to a relaxed R1CS instance
 /// The proof is produced using Spartan's combination of the sum-check and
 /// the commitment to a vector viewed as a polynomial commitment
-#[derive(Serialize, Deserialize)]
-#[serde(bound = "")]
-pub struct RelaxedR1CSSNARK<G: Group, EE: EvaluationEngineTrait<G, CE = G::CE>> {
-  sc_proof_outer: SumcheckProof<G>,
+pub struct RelaxedR1CSSNARK<G: Group> {
+  pub sc_proof_outer: SumcheckProof<G>,
   claims_outer: (G::Scalar, G::Scalar, G::Scalar),
-  sc_proof_inner: SumcheckProof<G>,
+  pub sc_proof_inner: SumcheckProof<G>,
   eval_E: G::Scalar,
   eval_W: G::Scalar,
   eval_arg: EE::EvaluationArgument,
