@@ -32,7 +32,6 @@ use bellperson::{
 use ff::Field;
 use serde::{Deserialize, Serialize};
 
-use serde::{Serialize, Deserialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct NovaAugmentedCircuitParams {
   limb_width: usize,
@@ -138,7 +137,6 @@ impl<G: Group, SC: StepCircuit<G::Base>> NovaAugmentedCircuit<G, SC> {
     let i = AllocatedNum::alloc(cs.namespace(|| "i"), || Ok(self.inputs.get()?.i))?;
 
     // Allocate z0
-    
     let z_0 = (0..arity)
       .map(|i| {
         AllocatedNum::alloc(cs.namespace(|| format!("z0_{i}")), || {
@@ -347,7 +345,7 @@ impl<G: Group, SC: StepCircuit<G::Base>> Circuit<<G as Group>::Base>
       ));
     }
 
-    // Compute the new hash H(params, i+1, z0, z_{i+1}, Unew)
+    // Compute the new hash H(params, Unew, i+1, z0, z_{i+1})
     let mut ro = G::ROCircuit::new(self.ro_consts, NUM_FE_WITHOUT_IO_FOR_CRHF + 2 * arity);
     ro.absorb(params);
     ro.absorb(i_new.clone());

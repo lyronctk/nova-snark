@@ -8,8 +8,9 @@ use ff::Field;
 use rayon::prelude::*;
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug)]
-pub struct SumcheckProof<G: Group> {
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(bound = "")]
+pub(crate) struct SumcheckProof<G: Group> {
   compressed_polys: Vec<CompressedUniPoly<G>>,
 }
 

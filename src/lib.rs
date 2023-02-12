@@ -4,8 +4,7 @@
   unused,
   future_incompatible,
   nonstandard_style,
-  rust_2018_idioms,
-  missing_docs
+  rust_2018_idioms
 )]
 #![allow(non_snake_case)]
 #![allow(clippy::type_complexity)]
@@ -13,10 +12,10 @@
 
 // private modules
 mod bellperson;
-mod commitments;
+pub mod circuit;
 mod constants;
 mod nifs;
-mod poseidon;
+pub mod r1cs;
 
 // public modules
 pub mod errors;
@@ -24,8 +23,6 @@ pub mod gadgets;
 pub mod provider;
 pub mod spartan;
 pub mod traits;
-pub mod circuit;
-pub mod r1cs;
 
 use crate::bellperson::{
   r1cs::{NovaShape, NovaWitness},
@@ -310,7 +307,7 @@ where
           &r_snark.l_u_secondary,
           &r_snark.l_w_secondary,
         )?;
-        
+
         let mut cs_primary: SatisfyingAssignment<G1> = SatisfyingAssignment::new();
         let inputs_primary: NovaAugmentedCircuitInputs<G2> = NovaAugmentedCircuitInputs::new(
           pp.r1cs_shape_secondary.get_digest(),
@@ -524,16 +521,16 @@ where
 {
   r_U_primary: RelaxedR1CSInstance<G1>,
   l_u_primary: R1CSInstance<G1>,
-  pub nifs_primary: NIFS<G1>,
-  pub f_W_snark_primary: S1,
+  nifs_primary: NIFS<G1>,
+  f_W_snark_primary: S1,
 
   r_U_secondary: RelaxedR1CSInstance<G2>,
   l_u_secondary: R1CSInstance<G2>,
-  pub nifs_secondary: NIFS<G2>,
-  pub f_W_snark_secondary: S2,
+  nifs_secondary: NIFS<G2>,
+  f_W_snark_secondary: S2,
 
-  pub zn_primary: Vec<G1::Scalar>,
-  pub zn_secondary: Vec<G2::Scalar>,
+  zn_primary: Vec<G1::Scalar>,
+  zn_secondary: Vec<G2::Scalar>,
 
   _p_c1: PhantomData<C1>,
   _p_c2: PhantomData<C2>,
